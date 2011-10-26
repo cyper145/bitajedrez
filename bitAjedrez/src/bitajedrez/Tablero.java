@@ -1,8 +1,11 @@
 package bitajedrez;
 
-import java.util.List;
-
 public class Tablero {
-    List<Casilla> listCasilla;
+    Casilla casilla[][];
+
+    public Tablero() {
+        casilla=new Casilla[8][8];
+    }
+    
     
 }
