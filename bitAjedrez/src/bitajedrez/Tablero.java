@@ -25,9 +25,28 @@ public class Tablero {
         return pieza;
     }
 
-    public void setCasilla(Casilla[][] casilla) {
-        this.casilla = casilla;
+    public void setPiezaEnCasilla(int fila, int columna, Pieza pieza) {
+        //boolean resultado;
+        
+        System.out.println(casilla[fila][columna].getPieza());
+                
+        //return resultado;
+    }
+
+    @Override
+    public String toString() {
+        String respuesta="";
+        for(int i=7;i>=0;i++){
+            for(int j=0;j<8;j++){
+                respuesta+=casilla[i][j].getPieza().toString();
+            }
+            respuesta+="\n";
+        }
+
+        return respuesta;
     }
     
+
     
+            
 }

@@ -8,5 +8,9 @@ public class Torre extends Pieza{
         super(color);
     }
     
+    @Override
+    public String toString() {
+        return (this.getColor()==Color.blanco)?"T":"t";
+    }
     
 }

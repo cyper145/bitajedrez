@@ -11,6 +11,7 @@ public class Partida {
     
     public Partida() {
         listJugador=new ArrayList();
+        tablero=new Tablero();
     }
     
     /**
@@ -40,7 +41,7 @@ public class Partida {
      * @param color
      * @return 
      */
-    public Jugador getJugador(String color){
+    public Jugador getJugador(Color color){
         //Iterador para comprobar los jugadores
         Iterator iterator=listJugador.iterator();
         
@@ -56,11 +57,29 @@ public class Partida {
         return null;
     }
     
-    /**
-     * Asigna el jugador que tiene el turno para mover
-     */
-    public void asignarTurno(Jugador jugador) {
-        this.jugadorTurno=jugador;
+    public Jugador getJugadorTurno() {
+        return jugadorTurno;
     }
 
+    public void setJugadorTurno(Jugador jugadorTurno) {
+        this.jugadorTurno = jugadorTurno;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
+    }
+
+    public void colocaPiezas(){
+        Iterator iterator=listJugador.iterator();
+        
+        //Cada jugador coloca sus piezas en el tablero
+        while(iterator.hasNext()){
+            Jugador jugador=(Jugador) iterator.next();
+            jugador.colocaPiezas(tablero);
+        }
+    }
 }
