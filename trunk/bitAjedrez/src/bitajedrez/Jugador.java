@@ -5,19 +5,19 @@ import piezas.*;
 
 public class Jugador {
     private String nombre;
-    private String color; //Blanca o Negra
+    private Color color; //Blanca o Negra
     List <Pieza> listPieza;
 
-    public Jugador(String nombre, String color) {
+    public Jugador(String nombre, Color color) {
         this.nombre = nombre;
         this.color = color;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -33,7 +33,8 @@ public class Jugador {
         
         for(int i=0;i<8;i++){
             Pieza peon=new Peon(this.color);
-            
+            listPieza.add(peon);
+            //tablero.casilla(i,2).set
         }
     }
     
