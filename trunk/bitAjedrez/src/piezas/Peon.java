@@ -8,4 +8,9 @@ public class Peon extends Pieza{
         super(color);
     }
 
+    @Override
+    public String toString() {
+        return (this.getColor()==Color.blanco)?"P":"p";
+    }
+    
 }

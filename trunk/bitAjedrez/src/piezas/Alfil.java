@@ -7,6 +7,12 @@ public class Alfil extends Pieza{
     public Alfil(Color color) {
         super(color);
     }
+
+    @Override
+    public String toString() {
+        return (this.getColor()==Color.blanco)?"A":"a";
+    }
+
     
     
     
