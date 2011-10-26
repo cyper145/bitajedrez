@@ -1,6 +1,7 @@
 package bitajedrez;
 
 import java.util.List;
+import piezas.*;
 
 public class Jugador {
     private String nombre;
@@ -28,5 +29,12 @@ public class Jugador {
         this.nombre = nombre;
     }
     
+    public void colocarPiezasInicio(Tablero tablero){
+        
+        for(int i=0;i<8;i++){
+            Pieza peon=new Peon(this.color);
+            
+        }
+    }
     
 }
