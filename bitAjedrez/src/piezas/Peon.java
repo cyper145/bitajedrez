@@ -1,8 +1,10 @@
 package piezas;
 
+import bitajedrez.Color;
+
 public class Peon extends Pieza{
 
-    public Peon(String color) {
+    public Peon(Color color) {
         super(color);
     }
 

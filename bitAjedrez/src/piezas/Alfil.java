@@ -1,8 +1,10 @@
 package piezas;
 
+import bitajedrez.Color;
+
 public class Alfil extends Pieza{
 
-    public Alfil(String color) {
+    public Alfil(Color color) {
         super(color);
     }
     

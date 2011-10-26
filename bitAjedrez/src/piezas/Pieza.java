@@ -1,9 +1,11 @@
 package piezas;
 
-public class Pieza {
-    private String color;
+import bitajedrez.Color;
 
-    public Pieza(String color) {
+public class Pieza {
+    private Color color;
+
+    public Pieza(Color color) {
         this.color = color;
     }
     
