@@ -38,13 +38,12 @@ public class Jugador {
         int detras = (this.color == Color.blanco) ? 0 : 7;
 
         //Linea de peones
-        /*
         for (int i = 0; i < 8; i++) {
             Pieza peon = new Peon(this.color);
             listPieza.add(peon);
             tablero.setPiezaEnCasilla(delante, i, peon);
-        }
-*/
+        } 
+         
         //Torre Izquierda
         Pieza torreI = new Torre(this.color);
         listPieza.add(torreI);
@@ -87,3 +86,5 @@ public class Jugador {
         
     }
 }
+
+

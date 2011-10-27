@@ -1,14 +1,8 @@
 package bitajedrez;
 
-import piezas.Pieza;
-
 public class Bitajedrez {
 
     public static void main(String[] args) {
-        Pieza a[]=new Pieza[5];
-        
-        a[2]=new Pieza(Color.blanco);
-        
         //Creamos la partida
         Partida partida=new Partida();
         
@@ -32,8 +26,11 @@ public class Bitajedrez {
         System.out.println("Juega con Negras:");
         System.out.println(partida.getJugador(Color.negro).getNombre());
 
+        //Mostramos de quien es el turno
         System.out.println("El turno es de:");
         System.out.println(partida.getJugadorTurno().getNombre());
         
+        //Pintamos el tablero
+        System.out.println(partida.getTablero().toString());
     }
 }
