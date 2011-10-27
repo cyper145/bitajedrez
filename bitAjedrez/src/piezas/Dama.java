@@ -10,7 +10,7 @@ public class Dama extends Pieza{
     
     @Override
     public String toString() {
-        return (this.getColor()==Color.blanco)?"D":"d";
+        return (this.getColor()==Color.blancas)?"D":"d";
     }
     
 }

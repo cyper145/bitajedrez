@@ -31,6 +31,14 @@ public class Tablero {
         return pieza;
     }
 
+    public Pieza getPiezaEnCasilla(String posicion) {
+        int fila = (int) posicion.charAt(1) - 49;
+        int columna = (int) posicion.charAt(0) - 97;
+        Pieza pieza = null;
+        pieza = getPiezaEnCasilla(fila, columna);
+        return pieza;
+    }
+
     public boolean setPiezaEnCasilla(int fila, int columna, Pieza pieza) {
         boolean resultado;
         resultado = casilla[fila][columna].setPieza(pieza);
@@ -61,16 +69,22 @@ public class Tablero {
         respuesta += "   A   B   C   D   E   F   G   H   \n";
         respuesta += " +---+---+---+---+---+---+---+---+ \n";
         for (int fila = 7; fila >= 0; fila--) {
-            respuesta += "" + (fila + 1) + "| ";
+            respuesta += "" + (fila + 1) + " |";
             for (int columna = 0; columna < 8; columna++) {
                 Pieza pieza = null;
+                if (casilla[fila][columna].getMarca() == Marca.seleccionado) {
+                    respuesta += ">";
+                }
                 pieza = casilla[fila][columna].getPieza();
                 if (pieza == null) {
                     respuesta += " ";
                 } else {
                     respuesta += pieza.toString();
                 }
-                respuesta += " | ";
+                if (casilla[fila][columna].getMarca() == Marca.seleccionado) {
+                    respuesta += "<";
+                }
+                respuesta += "| ";
             }
             respuesta += "" + (fila + 1) + "\n";
             respuesta += " +---+---+---+---+---+---+---+---+ \n";
@@ -78,6 +92,20 @@ public class Tablero {
         respuesta += "   A   B   C   D   E   F   G   H   \n";
 
         return respuesta;
+    }
 
+    /**
+     * Pone las marcas en en tablero según la pieza que esté seleccionada
+     * y sus movimientos posibles
+     * @param pieza 
+     */
+    public void marca(Pieza pieza) {
+        for (int fila = 0; fila < 8; fila++) {
+            for (int columna = 0; columna < 8; columna++) {
+                if (casilla[fila][columna].getPieza() == pieza) {
+                    casilla[fila][columna].setMarca(Marca.seleccionado);
+                }
+            }
+        }
     }
 }

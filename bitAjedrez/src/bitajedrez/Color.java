@@ -2,7 +2,7 @@ package bitajedrez;
 
 public enum Color {
 
-    blanco,
-    negro;
+    blancas,
+    negras;
     
 }
