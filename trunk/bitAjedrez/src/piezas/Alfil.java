@@ -10,7 +10,7 @@ public class Alfil extends Pieza{
 
     @Override
     public String toString() {
-        return (this.getColor()==Color.blanco)?"A":"a";
+        return (this.getColor()==Color.blancas)?"A":"a";
     }
 
     

@@ -10,7 +10,7 @@ public class Caballo extends Pieza{
     
     @Override
     public String toString() {
-        return (this.getColor()==Color.blanco)?"C":"c";
+        return (this.getColor()==Color.blancas)?"C":"c";
     }
     
     

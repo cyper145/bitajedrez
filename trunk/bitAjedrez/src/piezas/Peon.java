@@ -10,7 +10,7 @@ public class Peon extends Pieza{
 
     @Override
     public String toString() {
-        return (this.getColor()==Color.blanco)?"P":"p";
+        return (this.getColor()==Color.blancas)?"P":"p";
     }
     
 }

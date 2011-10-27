@@ -34,8 +34,8 @@ public class Jugador {
 
     public void colocaPiezas(Tablero tablero) {
         //Vemos qué fila es delante y detrás según el color que juega
-        int delante = (this.color == Color.blanco) ? 1 : 6;
-        int detras = (this.color == Color.blanco) ? 0 : 7;
+        int delante = (this.color == Color.blancas) ? 1 : 6;
+        int detras = (this.color == Color.blancas) ? 0 : 7;
 
         //Linea de peones
         for (int i = 0; i < 8; i++) {

@@ -33,5 +33,13 @@ public class Casilla {
         }
         return false;
     }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
         
 }

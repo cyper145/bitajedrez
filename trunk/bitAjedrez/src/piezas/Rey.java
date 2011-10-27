@@ -10,7 +10,7 @@ public class Rey extends Pieza{
     
     @Override
     public String toString() {
-        return (this.getColor()==Color.blanco)?"R":"r";
+        return (this.getColor()==Color.blancas)?"R":"r";
     }
     
     
