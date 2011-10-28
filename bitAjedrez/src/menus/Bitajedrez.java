@@ -30,29 +30,47 @@ public class Bitajedrez {
         System.out.println(partida.getJugador(Color.blancas).getNombre());
         System.out.print("Juega con Negras: ");
         System.out.println(partida.getJugador(Color.negras).getNombre());
+        System.out.println("---------------------------\n");
 
         
         //Pintamos el tablero
         System.out.println(partida.getTablero().muestraTxt());
         
         //Mostramos de quien es el turno
+        Jugador jugadorTurno=partida.getJugadorTurno();
+        
         System.out.print("El turno es de ");
-        System.out.print(partida.getJugadorTurno().getNombre());
-        System.out.println(" que juega con " + partida.getJugadorTurno().getColor());
+        System.out.print(jugadorTurno.getNombre());
+        System.out.println(" que juega con " + jugadorTurno.getColor());
         
         //Pedimos casilla de la pieza que vamos a mover
         String casillaDesde;
+        boolean error=false;
+        Pieza pieza=null;
         do{
+            error=false;
             casillaDesde=Bitutil.dameCasilla("Qué pieza quiere mover? ");
             if(casillaDesde==null){
+                //Si la casilla no es válida error=true
+                error=true;
                 System.out.println("Debe introducir letra-numero (Ej. D6) ");
+            }else{
+                //Vemos qué pieza es la que está ahí
+                pieza=partida.getTablero().getPiezaEnCasilla(casillaDesde);
+                if(pieza==null){
+                    error=true;
+                    System.out.println("No hay ninguna pieza ahí");
+                }else{
+                    if(jugadorTurno.tienePieza(pieza)){
+                        System.out.println("Pieza "+pieza.toString()+" seleccionada!");
+                    }else{
+                        error=true;
+                        System.out.println("Esa pieza no le pertenece al jugador");
+                    }
+                }
             }
-        } while (casillaDesde==null);
+        } while (error);
         
-        //Vemos qué pieza es la que está ahí
-        Pieza pieza=partida.getTablero().getPiezaEnCasilla(casillaDesde);
-        
-        System.out.println("Pieza "+pieza.toString()+" seleccionada!");
         
         //Marcamos el tablero con dicha pieza
         partida.getTablero().marca(pieza);
