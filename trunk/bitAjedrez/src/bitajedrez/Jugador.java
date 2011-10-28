@@ -85,6 +85,11 @@ public class Jugador {
         tablero.setPiezaEnCasilla(detras, 7, torreD);
         
     }
+    
+    public boolean tienePieza(Pieza pieza){
+        return listPieza.contains(pieza);
+    }
+
 }
 
 

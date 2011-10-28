@@ -66,14 +66,16 @@ public class Tablero {
 
     public String muestraTxt() {
         String respuesta = "";
-        respuesta += "   A   B   C   D   E   F   G   H   \n";
-        respuesta += " +---+---+---+---+---+---+---+---+ \n";
+        respuesta += "    A   B   C   D   E   F   G   H   \n";
+        respuesta += "  +---+---+---+---+---+---+---+---+ \n";
         for (int fila = 7; fila >= 0; fila--) {
             respuesta += "" + (fila + 1) + " |";
             for (int columna = 0; columna < 8; columna++) {
                 Pieza pieza = null;
                 if (casilla[fila][columna].getMarca() == Marca.seleccionado) {
                     respuesta += ">";
+                }else{
+                    respuesta += " ";
                 }
                 pieza = casilla[fila][columna].getPieza();
                 if (pieza == null) {
@@ -83,13 +85,15 @@ public class Tablero {
                 }
                 if (casilla[fila][columna].getMarca() == Marca.seleccionado) {
                     respuesta += "<";
+                }else{
+                    respuesta += " ";
                 }
-                respuesta += "| ";
+                respuesta += "|";
             }
-            respuesta += "" + (fila + 1) + "\n";
-            respuesta += " +---+---+---+---+---+---+---+---+ \n";
+            respuesta += " " + (fila + 1) + "\n";
+            respuesta += "  +---+---+---+---+---+---+---+---+ \n";
         }
-        respuesta += "   A   B   C   D   E   F   G   H   \n";
+        respuesta += "    A   B   C   D   E   F   G   H   \n";
 
         return respuesta;
     }
