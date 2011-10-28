@@ -2,12 +2,15 @@ package menus;
 
 import bitajedrez.Color;
 import bitajedrez.Jugador;
+import bitajedrez.Marca;
 import bitajedrez.Partida;
+import bitajedrez.Posicion;
 import piezas.*;
 
 public class Bitajedrez {
 
     public static void main(String[] args) {
+       
         //Creamos la partida
         Partida partida=new Partida();
         
@@ -31,10 +34,9 @@ public class Bitajedrez {
         System.out.print("Juega con Negras: ");
         System.out.println(partida.getJugador(Color.negras).getNombre());
         System.out.println("---------------------------\n");
-
         
         //Pintamos el tablero
-        System.out.println(partida.getTablero().muestraTxt());
+        System.out.println(partida.getTablero().salidaTxt());
         
         //Mostramos de quien es el turno
         Jugador jugadorTurno=partida.getJugadorTurno();
@@ -43,8 +45,8 @@ public class Bitajedrez {
         System.out.print(jugadorTurno.getNombre());
         System.out.println(" que juega con " + jugadorTurno.getColor());
         
-        //Pedimos casilla de la pieza que vamos a mover
-        String casillaDesde;
+        //Pedimos casilla de la pieza que vamos a mover para coger la pieza
+        String casillaDesde="";
         boolean error=false;
         Pieza pieza=null;
         do{
@@ -71,12 +73,29 @@ public class Bitajedrez {
             }
         } while (error);
         
-        
         //Marcamos el tablero con dicha pieza
-        partida.getTablero().marca(pieza);
+        partida.getTablero().marcaCasilla(pieza,Marca.seleccionado);
         
         //Pintamos de nuevo
-        System.out.println(partida.getTablero().muestraTxt());
+        System.out.println(partida.getTablero().salidaTxt());
+        
+        //Pedimos la casilla donde queremos mover
+        String casillaHacia="";
+        do{
+            error=false;
+            casillaHacia=Bitutil.dameCasilla("A donde la quieres mover? ");
+            if(casillaHacia==null){
+                //Si la casilla no es válida error=true
+                error=true;
+                System.out.println("Debe introducir letra-numero (Ej. D6) ");
+            }else{
+                boolean exito=partida.getTablero().muevePieza(pieza,casillaHacia);
+                error=!exito; //Error y el Exito son lo contrario
+            }
+        } while (error);
+        
+        //Pintamos de nuevo
+        System.out.println(partida.getTablero().salidaTxt());
         
     }
 }

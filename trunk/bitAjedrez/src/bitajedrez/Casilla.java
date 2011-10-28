@@ -27,13 +27,17 @@ public class Casilla {
      * @return true si se coloca y false si está ocupada y no se coloca
      */
     public boolean setPieza(Pieza pieza) {
-        if(pieza!=null){
+//        if(pieza!=null){
             this.pieza = pieza;
             return true;
-        }
-        return false;
+//        }
+//        return false;
     }
 
+    public void quitaPieza(){
+        this.pieza=null;
+    }
+    
     public Marca getMarca() {
         return marca;
     }

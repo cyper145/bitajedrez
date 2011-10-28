@@ -11,9 +11,9 @@ public class Tablero {
      */
     public Tablero() {
         casilla = new Casilla[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                casilla[i][j] = new Casilla();
+        for (int fila = 0; fila < 8; fila++) {
+            for (int columna = 0; columna < 8; columna++) {
+                casilla[fila][columna] = new Casilla();
             }
         }
     }
@@ -45,6 +45,18 @@ public class Tablero {
         return resultado;
     }
 
+    public void quitaPiezaEnCasilla(int fila, int columna){
+        casilla[fila][columna].quitaPieza();
+    }
+    
+    public boolean setPiezaEnCasilla(String posicion, Pieza pieza) {
+        boolean resultado;
+        int fila = (int) posicion.charAt(1) - 49;
+        int columna = (int) posicion.charAt(0) - 97;
+        resultado = setPiezaEnCasilla(fila, columna, pieza);
+        return resultado;
+    }
+
     @Override
     public String toString() {
         String respuesta = "";
@@ -64,7 +76,7 @@ public class Tablero {
         return respuesta;
     }
 
-    public String muestraTxt() {
+    public String salidaTxt() {
         String respuesta = "";
         respuesta += "    A   B   C   D   E   F   G   H   \n";
         respuesta += "  +---+---+---+---+---+---+---+---+ \n";
@@ -74,7 +86,7 @@ public class Tablero {
                 Pieza pieza = null;
                 if (casilla[fila][columna].getMarca() == Marca.seleccionado) {
                     respuesta += ">";
-                }else{
+                } else {
                     respuesta += " ";
                 }
                 pieza = casilla[fila][columna].getPieza();
@@ -85,7 +97,7 @@ public class Tablero {
                 }
                 if (casilla[fila][columna].getMarca() == Marca.seleccionado) {
                     respuesta += "<";
-                }else{
+                } else {
                     respuesta += " ";
                 }
                 respuesta += "|";
@@ -103,13 +115,32 @@ public class Tablero {
      * y sus movimientos posibles
      * @param pieza 
      */
-    public void marca(Pieza pieza) {
+    public void marcaCasilla(Pieza pieza, Marca marca) {
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 8; columna++) {
                 if (casilla[fila][columna].getPieza() == pieza) {
-                    casilla[fila][columna].setMarca(Marca.seleccionado);
+                    casilla[fila][columna].setMarca(marca);
                 }
             }
         }
+    }
+
+    /**
+     * Mueve la pieza seleccionada a la posicion elegida
+     */
+    public boolean muevePieza(Pieza pieza, String posicion) {
+        boolean correcto = false;
+        int fila = (int) posicion.charAt(1) - 49;
+        int columna = (int) posicion.charAt(0) - 97;
+        correcto = setPiezaEnCasilla(fila, columna, pieza);
+        if (correcto) {
+            quitaPiezaEnCasilla(fila, columna);
+        }
+        return correcto;
+    }
+    
+    public String getPosicionPieza(Pieza pieza){
+        String posicion=null;
+        return posicion;
     }
 }
