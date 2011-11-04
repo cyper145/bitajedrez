@@ -22,13 +22,14 @@ public class Bitajedrez {
         partida.agregarJugador(jugador1);
         partida.agregarJugador(jugador2);
         
-        //Cada jugador coloca sus piezas en el tablero
-        partida.colocaPiezas();
+        //Comienza la partida, esto pondrá las piezas en el tablero
+        partida.empezarPartida();
         
-        //Comienzan las blancas
-        partida.setJugadorTurno(partida.getJugador(Color.blancas));
-        
+        while(!partida.finPartida()){
         //Mostramos los jugadores:
+        Bitutil.borra();
+        partida.getTablero().limpiaMarcas();
+        
         System.out.print("Juega con Blancas: ");
         System.out.println(partida.getJugador(Color.blancas).getNombre());
         System.out.print("Juega con Negras: ");
@@ -75,9 +76,16 @@ public class Bitajedrez {
         
         //Marcamos el tablero con dicha pieza
         partida.getTablero().marcaCasilla(pieza,Marca.seleccionado);
+        //Borramos pantalla
+        Bitutil.borra();
         
         //Pintamos de nuevo
         System.out.println(partida.getTablero().salidaTxt());
+        //Mostramos instrucciones
+        System.out.print("El jugador ");
+        System.out.print(jugadorTurno.getNombre());
+        System.out.print(" que juega con " + jugadorTurno.getColor());
+        System.out.println(" debe decidir la casilla para "+pieza.toString());
         
         //Pedimos la casilla donde queremos mover
         String casillaHacia="";
@@ -94,8 +102,13 @@ public class Bitajedrez {
             }
         } while (error);
         
-        //Pintamos de nuevo
-        System.out.println(partida.getTablero().salidaTxt());
+        //Despues de mover cambiamos el turno
+        partida.turnoSiguiente();
+        
+        }
+
+        //Fin de la partida
+        System.out.println("FIN DE LA PARTIDA");
         
     }
 }

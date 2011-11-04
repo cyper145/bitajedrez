@@ -3,10 +3,14 @@ package bitajedrez;
 import piezas.Pieza;
 
 public class Casilla {
+    private int fila;
+    private int columna;
     private Pieza pieza;
     private Marca marca;
 
-    public Casilla() {
+    public Casilla(int fila, int columna) {
+        this.fila=fila;
+        this.columna=columna;
         this.pieza=null;
         this.marca=Marca.nada;
     }
@@ -27,15 +31,18 @@ public class Casilla {
      * @return true si se coloca y false si está ocupada y no se coloca
      */
     public boolean setPieza(Pieza pieza) {
-//        if(pieza!=null){
+        if(pieza!=null){
             this.pieza = pieza;
             return true;
-//        }
-//        return false;
+        }
+        return false;
     }
 
-    public void quitaPieza(){
-        this.pieza=null;
+    public Pieza quitaPieza(){
+        Pieza piezaQuitada=null;
+        piezaQuitada=this.pieza;
+        this.pieza=null; //Quitamos la pieza
+        return piezaQuitada;
     }
     
     public Marca getMarca() {

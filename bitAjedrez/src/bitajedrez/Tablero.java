@@ -4,16 +4,16 @@ import piezas.*;
 
 public class Tablero {
 
-    Casilla casilla[][];
+    Casilla arrayCasilla[][];
 
     /**
      * Esto crea un tablero vacio de 8x8 casillas
      */
     public Tablero() {
-        casilla = new Casilla[8][8];
+        arrayCasilla = new Casilla[8][8];
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 8; columna++) {
-                casilla[fila][columna] = new Casilla();
+                arrayCasilla[fila][columna] = new Casilla(fila, columna);
             }
         }
     }
@@ -27,7 +27,7 @@ public class Tablero {
      */
     public Pieza getPiezaEnCasilla(int fila, int columna) {
         Pieza pieza = null;
-        pieza = casilla[fila][columna].getPieza();
+        pieza = arrayCasilla[fila][columna].getPieza();
         return pieza;
     }
 
@@ -39,22 +39,50 @@ public class Tablero {
         return pieza;
     }
 
+    public Pieza getPiezaEnCasilla(Casilla casilla) {
+        Pieza pieza = null;
+        pieza = casilla.getPieza();
+        return pieza;
+    }
+
     public boolean setPiezaEnCasilla(int fila, int columna, Pieza pieza) {
         boolean resultado;
-        resultado = casilla[fila][columna].setPieza(pieza);
+        resultado = arrayCasilla[fila][columna].setPieza(pieza);
         return resultado;
     }
 
-    public void quitaPiezaEnCasilla(int fila, int columna){
-        casilla[fila][columna].quitaPieza();
-    }
-    
     public boolean setPiezaEnCasilla(String posicion, Pieza pieza) {
         boolean resultado;
         int fila = (int) posicion.charAt(1) - 49;
         int columna = (int) posicion.charAt(0) - 97;
         resultado = setPiezaEnCasilla(fila, columna, pieza);
         return resultado;
+    }
+
+    public boolean setPiezaEnCasilla(Casilla casilla, Pieza pieza) {
+        boolean resultado;
+        resultado = casilla.setPieza(pieza);
+        return resultado;
+    }
+
+    public Pieza quitaPiezaEnCasilla(int fila, int columna) {
+        Pieza piezaQuitada = null;
+        piezaQuitada = arrayCasilla[fila][columna].quitaPieza();
+        return piezaQuitada;
+    }
+
+    public Pieza quitaPiezaEnCasilla(String posicion) {
+        int fila = (int) posicion.charAt(1) - 49;
+        int columna = (int) posicion.charAt(0) - 97;
+        Pieza piezaQuitada = null;
+        piezaQuitada = quitaPiezaEnCasilla(fila, columna);
+        return piezaQuitada;
+    }
+
+    public Pieza quitaPiezaEnCasilla(Casilla casilla) {
+        Pieza piezaQuitada = null;
+        piezaQuitada = casilla.quitaPieza();
+        return piezaQuitada;
     }
 
     @Override
@@ -64,7 +92,7 @@ public class Tablero {
             respuesta += "(" + (fila + 1) + ":";
             for (int columna = 0; columna < 8; columna++) {
                 Pieza pieza = null;
-                pieza = casilla[fila][columna].getPieza();
+                pieza = arrayCasilla[fila][columna].getPieza();
                 if (pieza == null) {
                     respuesta += ".";
                 } else {
@@ -84,18 +112,18 @@ public class Tablero {
             respuesta += "" + (fila + 1) + " |";
             for (int columna = 0; columna < 8; columna++) {
                 Pieza pieza = null;
-                if (casilla[fila][columna].getMarca() == Marca.seleccionado) {
+                if (arrayCasilla[fila][columna].getMarca() == Marca.seleccionado) {
                     respuesta += ">";
                 } else {
                     respuesta += " ";
                 }
-                pieza = casilla[fila][columna].getPieza();
+                pieza = arrayCasilla[fila][columna].getPieza();
                 if (pieza == null) {
                     respuesta += " ";
                 } else {
                     respuesta += pieza.toString();
                 }
-                if (casilla[fila][columna].getMarca() == Marca.seleccionado) {
+                if (arrayCasilla[fila][columna].getMarca() == Marca.seleccionado) {
                     respuesta += "<";
                 } else {
                     respuesta += " ";
@@ -118,13 +146,21 @@ public class Tablero {
     public void marcaCasilla(Pieza pieza, Marca marca) {
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 8; columna++) {
-                if (casilla[fila][columna].getPieza() == pieza) {
-                    casilla[fila][columna].setMarca(marca);
+                if (arrayCasilla[fila][columna].getPieza() == pieza) {
+                    arrayCasilla[fila][columna].setMarca(marca);
                 }
             }
         }
     }
 
+    public void limpiaMarcas(){
+        for (int fila = 0; fila < 8; fila++) {
+            for (int columna = 0; columna < 8; columna++) {
+                    arrayCasilla[fila][columna].setMarca(Marca.nada);
+                
+            }
+        }
+    }
     /**
      * Mueve la pieza seleccionada a la posicion elegida
      */
@@ -132,15 +168,29 @@ public class Tablero {
         boolean correcto = false;
         int fila = (int) posicion.charAt(1) - 49;
         int columna = (int) posicion.charAt(0) - 97;
+        Casilla casillaDesde=getCasillaConPieza(pieza);
         correcto = setPiezaEnCasilla(fila, columna, pieza);
         if (correcto) {
-            quitaPiezaEnCasilla(fila, columna);
+            quitaPiezaEnCasilla(casillaDesde);
         }
         return correcto;
     }
-    
-    public String getPosicionPieza(Pieza pieza){
-        String posicion=null;
-        return posicion;
+
+    public Casilla getCasillaConPieza(Pieza pieza) {
+        Casilla casilla = null;
+        for (int fila = 0; fila < 8; fila++) {
+            for (int columna = 0; columna < 8; columna++) {
+                if (getPiezaEnCasilla(fila, columna) == pieza) {
+                    casilla = getCasilla(fila, columna);
+                }
+            }
+        }
+        return casilla;
+    }
+
+    public Casilla getCasilla(int fila, int columna) {
+        Casilla casilla = null;
+        casilla = arrayCasilla[fila][columna];
+        return casilla;
     }
 }
