@@ -62,4 +62,11 @@ public class Bitutil {
         return respuesta;
     }
 
+
+    public static void borra(){
+        for(int i=0;i<50;i++){
+            System.out.println("\n");
+        }
+    }
+
 }

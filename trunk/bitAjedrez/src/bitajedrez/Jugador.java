@@ -7,7 +7,7 @@ import piezas.*;
 public class Jugador {
 
     private String nombre;
-    private Color color; //Blanca o Negra
+    private Color color; //Blancas o Negras
     List<Pieza> listPieza;
 
     public Jugador(String nombre, Color color) {
@@ -86,6 +86,11 @@ public class Jugador {
         
     }
     
+    /**
+     * Devuelve true si la pieza indicada pertenece al jugador
+     * @param pieza
+     * @return true o false
+     */
     public boolean tienePieza(Pieza pieza){
         return listPieza.contains(pieza);
     }
