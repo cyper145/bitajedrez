@@ -45,6 +45,15 @@ public class Tablero {
         return pieza;
     }
 
+    /**
+     * Coloca una pieza en la casilla seleccionada por fila y columna
+     * En caso de que no haya nada en esa casilla, se devuelve null
+     * @param fila int
+     * @param columna int
+     * @param pieza que queremos colocar, para quitar la pieza debe usarse
+     * el metodo quitaPiezaEnCasilla, no se puede usar null
+     * @return 
+     */
     public boolean setPiezaEnCasilla(int fila, int columna, Pieza pieza) {
         boolean resultado;
         resultado = arrayCasilla[fila][columna].setPieza(pieza);
@@ -65,6 +74,13 @@ public class Tablero {
         return resultado;
     }
 
+    /**
+     * Quita una pieza del tablero en la posición seleccionada por fila y columna.
+     * La pieza quitada es devuelta para poder colocar en otro sitio si es necesario.
+     * @param fila
+     * @param columna
+     * @return pieza que hemos quitado o null si no había nada.
+     */
     public Pieza quitaPiezaEnCasilla(int fila, int columna) {
         Pieza piezaQuitada = null;
         piezaQuitada = arrayCasilla[fila][columna].quitaPieza();
@@ -153,6 +169,10 @@ public class Tablero {
         }
     }
 
+    public void marcaCasilla(Casilla casilla, Marca marca){
+        casilla.setMarca(marca);
+    }
+    
     public void limpiaMarcas(){
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 8; columna++) {
@@ -161,13 +181,24 @@ public class Tablero {
             }
         }
     }
+    
+    public void muevePieza(Pieza pieza, Casilla casilla){
+        
+        
+    }
+    
     /**
-     * Mueve la pieza seleccionada a la posicion elegida
+     * Mueve la pieza seleccionada a la posicion elegida.
      */
-    public boolean muevePieza(Pieza pieza, String posicion) {
+    public boolean muevePieza(Pieza pieza, String posicionHacia) {
         boolean correcto = false;
-        int fila = (int) posicion.charAt(1) - 49;
-        int columna = (int) posicion.charAt(0) - 97;
+        //Comprobamos si el movimiento es valido
+        //correcto=pieza.puedeIr(this, this.getCasilla(posicionHacia));
+        if(!correcto){
+            return false;
+        }
+        int fila = (int) posicionHacia.charAt(1) - 49;
+        int columna = (int) posicionHacia.charAt(0) - 97;
         Casilla casillaDesde=getCasillaConPieza(pieza);
         correcto = setPiezaEnCasilla(fila, columna, pieza);
         if (correcto) {
@@ -176,6 +207,12 @@ public class Tablero {
         return correcto;
     }
 
+    /**
+     * Devuelve la casilla que contiene la pieza que pasamos como parámetro.
+     * Si la pieza no estuviese en el tablero devolvería null.
+     * @param pieza
+     * @return casilla
+     */
     public Casilla getCasillaConPieza(Pieza pieza) {
         Casilla casilla = null;
         for (int fila = 0; fila < 8; fila++) {
@@ -188,9 +225,26 @@ public class Tablero {
         return casilla;
     }
 
+    /**
+     * Devuelve la casilla indicada por fila y columna, del tablero
+     * @param fila
+     * @param columna
+     * @return casilla
+     */
     public Casilla getCasilla(int fila, int columna) {
         Casilla casilla = null;
         casilla = arrayCasilla[fila][columna];
+        return casilla;
+    }
+
+    /**
+     * Devuelve la casilla indicada por posicion, del tablero
+     * @param posicion
+     * @return 
+     */
+    public Casilla getCasilla(String posicion){
+        Casilla casilla=null;
+        casilla=arrayCasilla[Casilla.fila(posicion)][Casilla.columna(posicion)];
         return casilla;
     }
 }

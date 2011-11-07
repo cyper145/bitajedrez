@@ -1,8 +1,11 @@
 package bitajedrez;
 
+import excepciones.ExMovimiento;
+import excepciones.ExSeleccion;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import piezas.Pieza;
 
 public class Partida {
     List<Jugador> listJugador;      //Lista de jugadores, (2 jugadores como máximo)
@@ -119,6 +122,9 @@ public class Partida {
         //Quizas sería mejor devolver el jugador que ha ganado o null si no ha acabado
     }
 
+    /**
+     * Cambia el turno de un jugador al otro
+     */
     public void turnoSiguiente(){
         if(jugadorTurno==listJugador.get(0)){
             jugadorTurno=listJugador.get(1);
@@ -127,4 +133,34 @@ public class Partida {
         }
     }
 
+    /**
+     * Realiza el movimiento del jugador que tiene el turno
+     */
+    public void mueve(Casilla desde, Casilla hacia) throws ExSeleccion, ExMovimiento{
+        //Obtenemos la pieza que está en la casilla desde
+        Pieza pieza = null;
+        pieza=tablero.getPiezaEnCasilla(desde);
+        //No hay pieza en la casilla desde
+        if(pieza==null){
+            throw new ExSeleccion("No hay ninguna pieza ahí");
+        }
+        //La pieza no le pertenece a la persona que tiene el turno
+        if(jugadorTurno.tienePieza(pieza)==false){
+            throw new ExSeleccion("Esa pieza no pertenece al jugador que tiene el turno");
+        }
+        //Comprobamos si la pieza puede moverse a la casilla
+        if(pieza.puedeIr(tablero, hacia)){
+            Pieza piezaMovida=tablero.quitaPiezaEnCasilla(desde);
+            tablero.setPiezaEnCasilla(hacia, piezaMovida);
+        }
+        
+    }
+    
+    /**
+     * Limpia las marcas del tablero
+     */
+    public void limpiaMarcas(){
+        tablero.limpiaMarcas();
+    }
 }
+
