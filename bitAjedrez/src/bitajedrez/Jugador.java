@@ -11,7 +11,7 @@ public class Jugador {
     List<Pieza> listPieza;
 
     public Jugador(String nombre, Color color) {
-        listPieza=new ArrayList();
+        listPieza = new ArrayList();
         this.nombre = nombre;
         this.color = color;
     }
@@ -42,8 +42,8 @@ public class Jugador {
             Pieza peon = new Peon(this.color);
             listPieza.add(peon);
             tablero.setPiezaEnCasilla(delante, i, peon);
-        } 
-         
+        }
+
         //Torre Izquierda
         Pieza torreI = new Torre(this.color);
         listPieza.add(torreI);
@@ -68,33 +68,30 @@ public class Jugador {
         Pieza rey = new Rey(this.color);
         listPieza.add(rey);
         tablero.setPiezaEnCasilla(detras, 4, rey);
-        
+
         //Alfil Derecha
         Pieza alfilD = new Alfil(this.color);
         listPieza.add(alfilD);
         tablero.setPiezaEnCasilla(detras, 5, alfilD);
-        
+
         //Caballo Derecha
         Pieza caballoD = new Caballo(this.color);
         listPieza.add(caballoD);
         tablero.setPiezaEnCasilla(detras, 6, caballoD);
-        
+
         //Torre Derecha
         Pieza torreD = new Torre(this.color);
         listPieza.add(torreD);
         tablero.setPiezaEnCasilla(detras, 7, torreD);
-        
+
     }
-    
+
     /**
      * Devuelve true si la pieza indicada pertenece al jugador
      * @param pieza
      * @return true o false
      */
-    public boolean tienePieza(Pieza pieza){
+    public boolean tienePieza(Pieza pieza) {
         return listPieza.contains(pieza);
     }
-
 }
-
-

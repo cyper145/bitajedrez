@@ -1,8 +1,11 @@
 package piezas;
 
+import bitajedrez.Casilla;
 import bitajedrez.Color;
+import bitajedrez.Tablero;
+import excepciones.ExMovimiento;
 
-public class Pieza {
+public abstract class Pieza {
     private Color color;
 
     public Pieza(Color color) {
@@ -17,4 +20,5 @@ public class Pieza {
         this.color = color;
     }
     
+    public abstract boolean puedeIr(Tablero tablero, Casilla hacia) throws ExMovimiento;
 }
